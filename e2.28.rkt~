@@ -1,0 +1,5 @@
+#lang sicp
+(define (fringe list)
+  (cond ((null? list) nil)
+        ((pair? (car list))
+         (cons (fringe (car list)) 

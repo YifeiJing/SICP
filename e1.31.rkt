@@ -1,0 +1,23 @@
+#lang sicp
+(define (product term a next b)
+  (if (> a b)
+      1
+      (* (term a)
+         (product term (next a) next b))))
+(define (inc i)
+  (+ i 1))
+(define (factorial a b)
+  (p-i identity a inc b))
+(define (product-iter term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (* result (term a)))))
+  (iter a 1))
+(define p-i product-iter)
+(define (cal-pi a b)
+    (define (next a)
+      (+ a 2))
+    (define (square a)
+      (* a a))
+    (* 4 (/ (* a (square (product identity (+ a 2) next (- b 2))) b) (square (product identity (+ a 1) next b)))))

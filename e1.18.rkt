@@ -1,0 +1,13 @@
+#lang sicp
+(define (even? a)
+  (= (remainder a 2) 0))
+(define (double a)
+  (+ a a))
+(define (halve a)
+  (if (even? a) (/ a 2) -1))
+(define (*-iter a b p)
+  (cond ((= b 0) p)
+        ((even? b) (*-iter (double a) (halve b) p))
+        (else (*-iter a (- b 1) (+ p a)))))
+(define (* a b)
+  (*-iter a b 0))

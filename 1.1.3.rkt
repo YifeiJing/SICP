@@ -1,0 +1,23 @@
+#lang sicp
+(define (sqrt-iter guess x)
+  (new-if (guess-good-enough guess x)
+       guess
+       (sqrt-iter (newguess guess x) x)))
+(define (guess-good-enough guess x)
+  (< (abs (- (square guess) x)) 0.001))
+(define (abs x)
+  (if (< x 0)
+      (- x)
+      x))
+(define (square x) (* x x))
+(define (newguess guess x)
+  (avrg (/ x guess) guess))
+(define (avrg x y)
+  (/ (+ x y) 2))
+
+(define (sqrt x)
+  (sqrt-iter 1.0 x))
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause)
+        (else else-clause)))
+(sqrt 3)

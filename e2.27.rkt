@@ -1,0 +1,18 @@
+#lang sicp
+(define (count-leaves x)
+  (cond ((null? x) 0)
+        ((not (pair? x)) 1)
+        (else (+ (count-leaves (car x))
+                 (count-leaves (cdr x))))))
+(define tt (list 1 (list 2 (list 3 4))))
+(count-leaves tt)
+(define (deep-reverse list)
+  (define (iter l result)
+    (cond ((null? l) result)
+          ((pair? (car l))
+           (iter (cdr l) (cons (deep-reverse (car l)) result)))
+          (else (iter (cdr l) (cons (car l) result)))))
+  (iter list nil))
+(define x (list (list 1 2) (list 3 4)))
+x
+(deep-reverse x)

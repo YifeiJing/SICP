@@ -1,0 +1,22 @@
+#lang sicp
+(define (cont-frac n d k)
+  (define (iter i result)
+    (if (= i 0)
+        result
+        (if (> i k)
+            (iter (- i 1) (+ result (/ (n i) (d i))))
+            (iter (- i 1) (/ (n i) (+ (d i) result))))))
+  (iter (- k 1) (/ (n k) (d k))))
+(define (cont-frac-recur n d k)
+  (define (iter i)
+    (if (= i k)
+        (/ (n i) (d i))
+        (/ (n i) (+ (d i) (iter (+ i 1))))))
+  (iter 1))
+(define (Euler-e n)
+  (define (d i)
+    (let ((a (remainder i 3)))
+      (if (or (= a 0) (= a 1))
+          1.0
+          (* 2.0 (+ 1 (/ (- i a) 3))))))
+  (+ 2 (cont-frac (lambda (i) 1.0) d n)))

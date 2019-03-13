@@ -1,0 +1,12 @@
+#lang sicp
+(define (smallest-divider n)
+  (divider-iter n 2))
+(define (square n)
+  (* n n))
+(define (divider-iter n a)
+  (cond ((> (square a) n) -1)
+        ((= (remainder n a) 0) a)
+        (else (divider-iter n (next a)))))
+(define sd smallest-divider)
+(define (next a)
+  (if (= a 2) 3 (+ a 2)))
