@@ -1,0 +1,18 @@
+#lang racket
+(define (rand arg)
+  (define seed 0)
+  (define a 3)
+  (define b 4)
+  (define m 5)
+  (define (generate)
+    (let ((new (remainder (+ (* a seed) b) m)))
+      ((set! seed new)
+       new)))
+  (define (reset new-value)
+    (set! seed new-value))
+  (define (dispatcher arg)
+    (cond ((eq? arg 'generate) (generate))
+          ((eq? arg 'reset) reset)
+          (else
+           (error "Invalid argument" arg))))
+  (dispatcher arg))
