@@ -1,8 +1,9 @@
 #lang racket
+(define random-init 0)
 (define (estimate-pi trials)
   (sqrt (/ 6 (monte-carlo trials cesaro-test))))
 (define (cesaro-test)
-  (= (gcd (rand) (rand) 1)))
+  (= (gcd (rand) (rand)) 1))
 (define rand
   (let ((x random-init))
     (lambda ()
@@ -19,3 +20,10 @@
            (iter (- trials-remaining 1)
                  trials-passed))))
   (iter trials 0))
+
+(define (rand-update x)
+  (let ((a 3)
+        (b 8)
+        (m 5))
+    (remainder (+ (* x a) b) m)))
+(estimate-pi 1000)
