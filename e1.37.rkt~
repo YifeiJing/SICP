@@ -1,9 +1,0 @@
-#lang sicp
-(define (cont-frac n d k)
-  (define (iter i result)
-    (if (= i 0)
-        result
-        (if (> i 2)
-            (iter (- i 1) (+ result (/ (n i) (d i))))
-            (iter (- i 1) (+ (d i) (/ (n i) result))))))
-  (iter (- k 1) (/ (n k) (d k))))
