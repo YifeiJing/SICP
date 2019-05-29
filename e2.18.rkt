@@ -7,3 +7,4 @@
   (iter list nil))
 (define ll (list 1 2 3 4))
 (define re (reverse ll))
+(display re)

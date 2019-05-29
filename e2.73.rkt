@@ -1,0 +1,18 @@
+#lang sicp
+(define (install-deriv-package)
+  (define (deriv-sum operands var)
+    (make-sum (deriv (car operands) var)
+              (deriv (cdr operands) var)))
+  (define (deriv-products operands var)
+    (make-sum (make-product (car operands)
+                            (deriv (cdr operands) var))
+              (make-product (deriv (car operands))
+                            (cdr operands))))
+  (define (deriv-exp operands var)
+    (make-product (make-product (cadr operands)
+                                (make-exponentiation (car operands) (- (cadr operands) 1)))
+                  (deriv (car operands) var)))
+  ; auxiliary code required to install in the table
+  (put 'deriv '(+) deriv-sum)
+  (put 'deriv '(*) deriv-products)
+  (put 'deriv '(**) deriv-exp))

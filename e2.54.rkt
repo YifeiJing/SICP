@@ -6,3 +6,4 @@
          (and (equal? (car list1) (car list2))
               (equal? (cdr list1) (cdr list2))))
         (else (eq? list1 list2))))
+(display (equal? '(a list) 1))
