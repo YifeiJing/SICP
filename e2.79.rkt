@@ -1,0 +1,16 @@
+#lang sicp
+(define (install-equ?-package)
+  (define (rat-equ? x y)
+    (and (= (numer x) (numer y)) (= (denom x) (denom y))))
+  (define (complex-equ? z1 z2)
+    (and (= (real-part z1) (real-part z2)) (= (imag-part z1) (imag-part z2))))
+  ;; intallation
+  (put 'equ? '(scheme-number scheme-number)
+       (lambda (x y) (= x y)))
+  (put 'equ? '(rational rational)
+       (lambda (x y) (rat-equ? x y)))
+  (put 'equ? '(complex comlex)
+       (lambda (z1 z2) (complex-equ? z1 z2)))
+  'done)
+(define (equ? x y)
+  (apply-generic 'equ? x y))
