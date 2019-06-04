@@ -1,4 +1,4 @@
-#lang racket
+#lang sicp
 (define (rand arg)
   (define seed 0)
   (define a 3)
