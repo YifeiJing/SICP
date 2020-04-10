@@ -12,8 +12,8 @@
         ((begin? exp)
          (eval-sequence (begin-actions exp) env))
         ((cond? exp) (eval (cond->if exp) env))
-        ((and? exp) (eval-and (and-clauses exp) env))
-        ((or? exp) (eval-or (or-clauses exp) env))
+        ((and? exp) (eval-and (and-clauses exp) env)) ;; wrong
+        ((or? exp) (eval-or (or-clauses exp) env))  ;; wrong
         ((application? exp)
          (apply (eval (operator exp) env)
                 (list-of-values (operands exp) env)))
@@ -133,6 +133,10 @@
                      (expand-clauses rest))))))
 (define (and? exp) (tagged-list? exp 'and))
 (define (and-clauses exp) (cdr exp))
+;; this is the wrong implementation of and and or syntax
+;; because and will stop eval once it meets a false, and
+;; or will terminate once it faces a true value. They are
+;; special forms, for the right implementations see e4.4
 (define (eval-and clauses env)
   (let ((first-exp (car exp))
         (rest-exps (cdr exp)))

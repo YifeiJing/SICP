@@ -1,0 +1,12 @@
+#lang sicp
+(define (eval exp env)
+  (cond ((self-evaluating? exp) exp)
+        ((variable? exp) (lookup-variable-value exp env))
+        ((get-syntax 'syn (car exp)) ((get-syntax 'syn (car exp)) (eval (cdr exp) env)))
+        ((application? exp)
+         (applyn (eval (car exp) env)
+                 (arg-lists (cdr exp) env)))
+        (error "Unknown expression type: EVAL " exp)))
+(put 'syn 'quote text-of-quotation)
+(put 'syn 'set! eval-assignment)
+(put 'syn 'if eval-if)
